@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="okno_projekt">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/szpital2/src/main/java/HospitalApplication/layout/okno_projekt.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

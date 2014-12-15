@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="javax.mail">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/szpital2/szpital2/lib/javax.mail.jar!/" />
+      <root url="jar://$PROJECT_DIR$/szpital2/szpital2/lib/Fillo-1.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/szpital2/szpital2/lib/commons-logging-1.1.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/szpital2/szpital2/lib/jgoodies-forms-1.8.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/szpital2/szpital2/lib/miglayout15-swing.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/szpital2/szpital2/lib/jgoodies-forms-1.8.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -62,7 +62,7 @@ public class App {
                 daService.persistDawca(da);
             }
         }*/
-
+        System.out.println("Chuj");
         if(emService.checkEmail(email) == true){
             ArrayList<String> paths = emService.downloadExcelFile();
             String pesel = null;

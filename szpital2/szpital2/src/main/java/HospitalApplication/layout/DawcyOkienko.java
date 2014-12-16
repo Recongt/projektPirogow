@@ -69,13 +69,6 @@ public class DawcyOkienko extends JFrame{
                     case 1: return dawca.getAge();
                     case 2: return dawca.getSex();
                     case 3: return dawca.getDate().toString();
-                    case 4: return dawca.getIcd10_1();
-                    case 5: return dawca.getIcd10_2();
-                    case 6: return dawca.getIcd10_3();
-                    case 7: return dawca.getIcd10_4();
-                    case 8: return dawca.getGcs().toString();
-                    case 9: return dawca.getPatientCategory();
-                    case 10: return dawca.getUwagi();
                     default: return null;
                 }
             }

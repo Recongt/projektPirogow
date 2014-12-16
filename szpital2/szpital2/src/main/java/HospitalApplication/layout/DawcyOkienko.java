@@ -26,6 +26,7 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+
 public class DawcyOkienko extends JFrame{
 
 
@@ -68,7 +69,7 @@ public class DawcyOkienko extends JFrame{
                     case 0: return dawca.getPesel();
                     case 1: return dawca.getAge();
                     case 2: return dawca.getSex();
-                    case 3: return dawca.getDate().toString();
+                    case 3: return dawca.getDate();
                     default: return null;
                 }
             }

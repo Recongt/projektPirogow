@@ -18,13 +18,18 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 //import org.apache.log4j.Logger;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
 public class App {
 
-    public static void main(String [] args) {
+    public static void main(String [] args) throws IOException {
         System.out.println("load context");
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
         Email email = (Email) context.getBean("email");
@@ -32,6 +37,12 @@ public class App {
         EmailService emService = (EmailService) context.getBean("emailService");
         DawcaService daService = (DawcaService) context.getBean("dawcaService");
         ExcelService exService = (ExcelService) context.getBean("excelService");
+
+        String soundFile = "xD.wav";
+        InputStream in = new FileInputStream(soundFile);
+        AudioStream audioStream = new AudioStream(in);
+        AudioPlayer.player.start(audioStream);
+
 
         /*
         System.out.println("Realoading database");
@@ -117,7 +128,6 @@ public class App {
             System.out.println("Wywiad: "+dawca.getWywiad());
             System.out.println("Rozpoznanie: "+dawca.getRozpoznanie());
         }
-
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override

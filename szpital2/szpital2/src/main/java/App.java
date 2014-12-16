@@ -10,6 +10,7 @@ import HospitalApplication.email.service.EmailService;
 import HospitalApplication.excel.service.ExcelService;
 import HospitalApplication.icd10database.operations.Operations;
 import HospitalApplication.icd10database.operations.Test;
+import HospitalApplication.layout.DawcyOkienko;
 import HospitalApplication.layout.okienko;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -124,7 +125,7 @@ public class App {
                 new Test(Operations.generateIcd10Dictionary());
             }
         });
-        EventQueue.invokeLater(new Runnable() {
+        /*EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
 
@@ -134,7 +135,15 @@ public class App {
                     e.printStackTrace();
                 }
             }
-        });
+        });*/
+
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            System.out.println(ex);
+        }
+        DawcyOkienko okienko = new DawcyOkienko();
+
         context.close();
         }
     }

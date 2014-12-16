@@ -142,7 +142,7 @@ public class App {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             System.out.println(ex);
         }
-        DawcyOkienko okienko = new DawcyOkienko();
+        DawcyOkienko okienko = new DawcyOkienko(dawcy);
 
         context.close();
         }

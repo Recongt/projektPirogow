@@ -1,10 +1,13 @@
 package HospitalApplication.layout;
 
+import HospitalApplication.database.model.Dawca;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.io.IOException;
+import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -20,10 +23,13 @@ import javax.swing.JToolBar;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 public class DawcyOkienko extends JFrame{
-    public DawcyOkienko(){
+
+
+    public DawcyOkienko(final List<Dawca> dawcy){
         /**********************************************************************/
         /*ROZMIAR OKNA*/
         int windowWidth = 800;
@@ -42,7 +48,8 @@ public class DawcyOkienko extends JFrame{
                                 "KATEGORIA PACJENTA",
                                 "UWAGI"};
         final int columns = columnNames.length;
-        final int rows = 50;        
+        final int rows = dawcy.size();
+        final Object[][] rowData = new String[rows][columns];
         /**********************************************************************/
         /*MODEL TABELKI*/
         TableModel dataModel = new AbstractTableModel(){
@@ -54,15 +61,32 @@ public class DawcyOkienko extends JFrame{
             public int getColumnCount() {
                 return columns;
             }
-            @Override /*ustawia zawartosc tablicy*/
-            public Object getValueAt(int rowIndex, int columnIndex) { 
-                return new String("");
+            @Override //ustawia zawartosc tablicy
+            public Object getValueAt(int rowIndex, int columnIndex) {
+                Dawca dawca = dawcy.get(rowIndex);
+                switch(columnIndex){
+                    case 0: return dawca.getPesel();
+                    case 1: return dawca.getAge();
+                    case 2: return dawca.getSex();
+                    case 3: return dawca.getDate().toString();
+                    case 4: return dawca.getIcd10_1();
+                    case 5: return dawca.getIcd10_2();
+                    case 6: return dawca.getIcd10_3();
+                    case 7: return dawca.getIcd10_4();
+                    case 8: return dawca.getGcs().toString();
+                    case 9: return dawca.getPatientCategory();
+                    case 10: return dawca.getUwagi();
+                    default: return null;
+                }
             }
             @Override
             public String getColumnName(int index) {
                 return columnNames[index];
             }
         };
+
+        //DefaultTableModel dataModel = new DefaultTableModel(columnNames,0);
+
         /**********************************************************************/
         /*INICJALIZACJA TABELKI*/
         JTable table = new JTable(dataModel);

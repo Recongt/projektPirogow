@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -26,11 +27,16 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import HospitalApplication.icd10database.operations.AutoSuggestor;
+import HospitalApplication.icd10database.operations.Operations;
 
 public class DawcyOkienko extends JFrame{
+    final private  Map<String, String> words;
+    final List<Dawca> dawcy;
 
-
-    public DawcyOkienko(final List<Dawca> dawcy){
+    public DawcyOkienko(final List<Dawca> dawcy,final Map<String, String> words){
+        this.words = words;
+        this.dawcy = dawcy;
         /**********************************************************************/
         /*ROZMIAR OKNA*/
         int windowWidth = 800;
@@ -41,6 +47,8 @@ public class DawcyOkienko extends JFrame{
                                 "WIEK", 
                                 "PŁEĆ",
                                 "DATA PRZYJECIA NA OIOM",
+                                "ILOSC DNI NA OIOM",
+                                "OSTANIA AKTUALIZACJA",
                                 "ROZPOZNANIE ICD10",
                                 "ROZPOZNANIE ICD10",
                                 "ROZPOZNANIE ICD10",
@@ -50,7 +58,6 @@ public class DawcyOkienko extends JFrame{
                                 "UWAGI"};
         final int columns = columnNames.length;
         final int rows = dawcy.size();
-        final Object[][] rowData = new String[rows][columns];
         /**********************************************************************/
         /*MODEL TABELKI*/
         TableModel dataModel = new AbstractTableModel(){
@@ -70,6 +77,8 @@ public class DawcyOkienko extends JFrame{
                     case 1: return dawca.getAge();
                     case 2: return dawca.getSex();
                     case 3: return dawca.getDate();
+                    case 4: return dawca.getHowLongOiom();
+                    case 5: return dawca.getDateUpdate().get(dawca.getDateUpdate().size()-1);
                     default: return null;
                 }
             }
@@ -102,15 +111,27 @@ public class DawcyOkienko extends JFrame{
         toolBar.setFloatable(false);
         JButton testBtn1 = new JButton();
         //try {
-            //Image img = ImageIO.read(getClass().getResource("HospitalApplication/layout/settings_icon.png"));
-            //testBtn1.setIcon(new ImageIcon(img));
+        //    Image img = ImageIO.read(getClass().getResource("settings_icon.png"));
+        //    testBtn1.setIcon(new ImageIcon(img));
             testBtn1.setBorder(buttonBorder);
-        //} catch (IOException ex) {
+       // } catch (IOException ex) {
         //    System.out.println(ex);
         //}
         
         JLabel szukajkaLabel = new JLabel("ICD10: ");
+        JFrame szukajkaFrame = new JFrame();
         JTextField szukajka = new JTextField();
+
+        AutoSuggestor autoSuggestor = new AutoSuggestor(szukajka, szukajkaFrame, null, Color.WHITE.brighter(), Color.BLUE, Color.RED, 0.75f) {
+            @Override
+            protected boolean wordTyped(String typedWord) {
+
+                setDictionary(words);
+
+                return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
+            }
+        };
+
         szukajka.setPreferredSize(new Dimension(120, 20));
         szukajka.setMaximumSize(szukajka.getPreferredSize());
         

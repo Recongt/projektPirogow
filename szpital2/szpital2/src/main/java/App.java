@@ -9,9 +9,7 @@ import HospitalApplication.email.model.Email;
 import HospitalApplication.email.service.EmailService;
 import HospitalApplication.excel.service.ExcelService;
 import HospitalApplication.icd10database.operations.Operations;
-import HospitalApplication.icd10database.operations.Test;
 import HospitalApplication.layout.DawcyOkienko;
-import HospitalApplication.layout.okienko;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -37,12 +35,12 @@ public class App {
         EmailService emService = (EmailService) context.getBean("emailService");
         DawcaService daService = (DawcaService) context.getBean("dawcaService");
         ExcelService exService = (ExcelService) context.getBean("excelService");
-
+        /*
         String soundFile = "xD.wav";
         InputStream in = new FileInputStream(soundFile);
         AudioStream audioStream = new AudioStream(in);
         AudioPlayer.player.start(audioStream);
-
+        */
 
         /*
         System.out.println("Realoading database");
@@ -73,8 +71,9 @@ public class App {
                 new File(exService.getPath()).delete();
                 daService.persistDawca(da);
             }
-        }*/
+        }
         System.out.println("Chuj");
+        */
         if(emService.checkEmail(email) == true){
             ArrayList<String> paths = emService.downloadExcelFile();
             String pesel = null;
@@ -129,35 +128,13 @@ public class App {
             System.out.println("Rozpoznanie: "+dawca.getRozpoznanie());
         }
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new Test(Operations.generateIcd10Dictionary());
-            }
-        });
-        /*EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-
-                    okienko frame = new okienko();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });*/
-
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             System.out.println(ex);
         }
-        DawcyOkienko okienko = new DawcyOkienko(dawcy);
+        DawcyOkienko okienko = new DawcyOkienko(dawcy,Operations.generateIcd10Dictionary());
 
         context.close();
         }
     }
-
-
-
-

@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * Created by GUCIA on 2014-12-06.
  */
-class AutoSuggestor {
+public class AutoSuggestor {
 
     private final JTextField textField;
     private final Window container;
@@ -249,7 +249,7 @@ class AutoSuggestor {
     //    dictionary.add(word);
     //}
 
-    boolean wordTyped(String typedWord) {
+    protected boolean wordTyped(String typedWord) {
 
         //System.out.println(typedWord);
         if (typedWord.isEmpty()) {
